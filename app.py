@@ -9,6 +9,14 @@ from langchain.chains.conversation.memory import ConversationBufferMemory
 from threading import Lock
 
 
+# Obtén la ruta absoluta del directorio donde se encuentra este script
+current_script_path = os.path.abspath(__file__)
+current_script_dir = os.path.dirname(current_script_path)
+
+# Cambia el directorio de trabajo actual al directorio del script
+os.chdir(current_script_dir)
+
+
 def load_chain():
     prefix_messages = [
         {
@@ -17,7 +25,7 @@ def load_chain():
         }
     ]
 
-    llm = OpenAIChat(model_name="gpt-3.5-turbo-0301", temperature=0.8, prefix_messages=prefix_messages)
+    llm = OpenAIChat(model_name="gpt-3.5-turbo", temperature=0.8, prefix_messages=prefix_messages)
 
     prompt = PromptTemplate(
         input_variables=['history', 'input'],
